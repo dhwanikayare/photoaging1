@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Optional
 from PIL import Image
 
-from backend.app.model_utils import predict_visible_photoaging
+from app.model_utils import predict_visible_photoaging
 
 BASE_DIR = Path(__file__).resolve().parent
 AQI_PATH = BASE_DIR / "data" / "city_pm25_aqi.csv"
