@@ -5,6 +5,8 @@ import "./App.css";
 
 function App() {
 
+ const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
  const [screen, setScreen] = useState("landing");
 
 const [image, setImage] = useState(null);
@@ -71,7 +73,7 @@ const faceDetectorRef = useRef(null);
 
       try {
 
-        const response = await fetch("http://127.0.0.1:8000/cities");
+        const response = await fetch(`${API_BASE}/cities`);
 
         const data = await response.json();
 
@@ -742,14 +744,10 @@ const toTitleCase = (text) => {
 
 
 
-      const res = await fetch("http://127.0.0.1:8000/analyze", {
-
-        method: "POST",
-
-        body: formData,
-
-      });
-
+    const res = await fetch(`${API_BASE}/analyze`, {
+  method: "POST",
+  body: formData,
+});
 
 
       if (!res.ok) {
