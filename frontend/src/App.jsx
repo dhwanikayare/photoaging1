@@ -510,7 +510,7 @@ const capturePhoto = () => {
 
     if (score < 0.66) {
 
-      return "The facial image shows some visible features associated with cumulative skin ageing and environmental exposure.";
+      return "The facial image shows some visible features associated with cumulative skin aging and environmental exposure.";
 
     }
 
@@ -854,7 +854,7 @@ setScreen("results");
 
             <p className="hero-subtitle-premium">
 
-              AI based assessment of visible skin ageing and lifestyle exposure,
+              AI based assessment of visible skin aging and lifestyle exposure,
 
               designed to support awareness, prevention, and better daily skin care decisions.
 
@@ -890,7 +890,7 @@ setScreen("results");
 
               <p className="section-copy-premium">
 
-                Visible skin ageing is shaped by cumulative environmental exposure and daily behaviour, not only time.
+                Visible skin aging is shaped by cumulative environmental exposure and daily behaviour, not only time.
 
               </p>
 
@@ -902,11 +902,11 @@ setScreen("results");
 
               <article className="fact-card-premium">
 
-                <h3>Up to 80% of visible skin ageing is linked to sun exposure</h3>
+                <h3>Up to 80% of visible skin aging is linked to sun exposure</h3>
 
                 <p>
 
-                  Most visible ageing is not simply time. It is driven by cumulative ultraviolet
+                  Most visible aging is not simply time. It is driven by cumulative ultraviolet
 
                   exposure that gradually breaks down collagen, alters pigmentation, and changes skin structure.
 
