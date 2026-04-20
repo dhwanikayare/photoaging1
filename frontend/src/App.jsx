@@ -501,42 +501,24 @@ const capturePhoto = () => {
 };
 
   const getVisibleScoreExplanation = (score) => {
+  if (score < 0.25) {
+    return "The facial image shows relatively limited visible features commonly associated with photoaging.";
+  }
+  if (score < 0.55) {
+    return "The facial image shows noticeable visible features associated with cumulative skin aging, including lines, texture change, or uneven tone.";
+  }
+  return "The facial image shows more pronounced visible features associated with photoaging, including changes that may reflect longer term cumulative damage.";
+};
 
-    if (score < 0.33) {
-
-      return "The facial image shows relatively limited visible features commonly associated with photoaging.";
-
-    }
-
-    if (score < 0.66) {
-
-      return "The facial image shows some visible features associated with cumulative skin aging and environmental exposure.";
-
-    }
-
-    return "The facial image shows more pronounced visible features associated with photoaging, including changes that may reflect longer term cumulative damage.";
-
-  };
-
-
-
-  const getExposureScoreExplanation = (score) => {
-
-    if (score < 0.33) {
-
-      return "Your reported lifestyle and environmental profile suggest a relatively lower level of cumulative exposure.";
-
-    }
-
-    if (score < 0.66) {
-
-      return "Your reported lifestyle and environmental profile suggests a moderate level of cumulative exposure over time.";
-
-    }
-
-    return "Your reported lifestyle and environmental profile suggests a higher level of cumulative exposure that may contribute more strongly to photoaging over time.";
-
-  };
+const getExposureScoreExplanation = (score) => {
+  if (score < 0.30) {
+    return "Your reported lifestyle and environmental profile suggests a relatively lower level of cumulative exposure.";
+  }
+  if (score < 0.60) {
+    return "Your reported lifestyle and environmental profile suggests a moderate level of cumulative exposure over time.";
+  }
+  return "Your reported lifestyle and environmental profile suggests a higher level of cumulative exposure that may contribute more strongly to photoaging over time.";
+};
 
 
 
