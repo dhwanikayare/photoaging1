@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Optional
 from PIL import Image
 
-from app.model_utils import predict_visible_photoaging
+from backend.app.model_utils import predict_visible_photoaging
 
 BASE_DIR = Path(__file__).resolve().parent
 AQI_PATH = BASE_DIR / "data" / "city_pm25_aqi.csv"
@@ -63,29 +63,46 @@ def normalize_pm25(aqi: Optional[float]) -> float:
     return 1.0
 
 
-def category(score: float) -> str:
-    if score < 0.33:
+def category_final(score: float) -> str:
+    if score < 0.30:
         return "Low"
-    elif score < 0.66:
+    elif score < 0.58:
+        return "Moderate"
+    return "High"
+
+
+def category_visible(score: float) -> str:
+    if score < 0.25:
+        return "Low"
+    elif score < 0.55:
+        return "Moderate"
+    return "High"
+
+
+def category_exposure(score: float) -> str:
+    if score < 0.30:
+        return "Low"
+    elif score < 0.60:
         return "Moderate"
     return "High"
 
 
 def describe_visible_score(score: float) -> str:
-    if score < 0.33:
+    label = category_visible(score)
+    if label == "Low":
         return "Limited visible signs"
-    elif score < 0.66:
+    elif label == "Moderate":
         return "Moderate visible signs"
     return "More pronounced visible signs"
 
 
 def describe_exposure_score(score: float) -> str:
-    if score < 0.33:
+    label = category_exposure(score)
+    if label == "Low":
         return "Lower cumulative exposure"
-    elif score < 0.66:
+    elif label == "Moderate":
         return "Moderate cumulative exposure"
     return "Elevated cumulative exposure"
-
 
 # =============================
 # AQI LOOKUP
@@ -252,7 +269,7 @@ def run_analysis(
 
     final_score = clamp01(0.80 * visible_score + 0.20 * exposure_score)
 
-    risk_label = category(final_score)
+    risk_label = category_final(final_score)
 
     return {
         "visible_score": visible_score,
