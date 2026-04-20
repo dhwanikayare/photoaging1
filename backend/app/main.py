@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
 
-from app.risk_logic import run_analysis, aqi_df
+from backend.app.risk_logic import run_analysis, aqi_df
 
 app = FastAPI(title="Photoaging Insight API")
 
