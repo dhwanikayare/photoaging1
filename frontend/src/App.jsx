@@ -128,29 +128,33 @@ useEffect(() => {
         minDetectionConfidence: 0.6,
       });
 
-      detector.onResults((results) => {
-        if (results.detections && results.detections.length > 0) {
-          const detection = results.detections[0];
-          const box = detection.boundingBox;
+   detector.onResults((results) => {
+  if (results.detections && results.detections.length > 0) {
+    const detection = results.detections[0];
+    const box = detection.boundingBox;
 
-          setFaceBox({
-            xCenter: box.xCenter,
-            yCenter: box.yCenter,
-            width: box.width,
-            height: box.height,
-          });
+    const expandedWidth = Math.min(box.width * 1.15, 0.95);
+    const expandedHeight = Math.min(box.height * 1.35, 0.95);
+    const adjustedYCenter = Math.max(box.yCenter - box.height * 0.10, expandedHeight / 2);
 
-          setFaceDetected(true);
+    setFaceBox({
+      xCenter: box.xCenter,
+      yCenter: adjustedYCenter,
+      width: expandedWidth,
+      height: expandedHeight,
+    });
 
-          setTimeout(() => {
-            setScanComplete(true);
-          }, 1500);
-        } else {
-          setFaceDetected(false);
-          setFaceBox(null);
-          setScanComplete(false);
-        }
-      });
+    setFaceDetected(true);
+
+    setTimeout(() => {
+      setScanComplete(true);
+    }, 1500);
+  } else {
+    setFaceDetected(false);
+    setFaceBox(null);
+    setScanComplete(false);
+  }
+});
 
       faceDetectorRef.current = detector;
     } catch (err) {
