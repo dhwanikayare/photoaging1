@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 import io
+import traceback
 
 from app.risk_logic import run_analysis, aqi_df
 
@@ -43,7 +44,7 @@ async def analyze(
         image_bytes = await image.read()
         img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
-    except Exception as e:
+    except Exception:
         raise HTTPException(status_code=400, detail="Invalid image file")
 
     try:
@@ -57,4 +58,7 @@ async def analyze(
         return result
 
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+    
